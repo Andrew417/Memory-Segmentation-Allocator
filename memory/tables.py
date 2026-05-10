@@ -11,6 +11,20 @@ class HolesTable:
     def sort_holes(self):
         self.holes.sort(key=lambda hole: hole.start_address)
 
+    def merge_adjacent(self):
+        self.sort_holes()
+        i = 0
+        while i < len(self.holes) - 1:
+            current = self.holes[i]
+            next_hole = self.holes[i + 1]
+
+            if current.end_address + 1 == next_hole.start_address:
+                merged_end = max(current.end_address, next_hole.end_address)
+                current.size = merged_end - current.start_address + 1
+                self.remove_hole(next_hole)
+            else:
+                i += 1
+
     def __repr__(self):
         return f"HolesTable(holes={len(self.holes)})"   
 

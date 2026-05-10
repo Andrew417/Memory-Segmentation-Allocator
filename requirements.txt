@@ -1,1 +1,4 @@
- 
+ colorama
+ pyinstaller
+ pytest
+ customtinker
